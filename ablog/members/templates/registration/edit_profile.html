@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Profile {% endblock%}
+
+{% block content %}
+<h1>Edit profile</h1>
+<br><br>
+
+{{ user.profile.bio }}
+
+<div class="form-group">
+    <form method="Post">
+        {% csrf_token %}
+        <!--        {{ form.as_p }}-->
+
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            <br>
+            {% if field.help_text %}
+               <small><p class="help">{{ field.help_text|safe }}</p></small>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+
+        <button class="btn btn-secondary">Update Profile</button>
+    </form>
+</div>
+
+<script>
+
+var helpText = document.getElementsByClassName("help");
+helpText[0].innerHTML = "<span><a href = '../password/'  target= '_blank'>Click here</a></span>"
+
+var idPassword = document.getElementById("id_password").remove();
+
+<!--var helpText = document.getElementsByClassName("helptext");-->
+<!--helpText[0].innerHTML = "<span><a href = '../password/'  target= '_blank'>Click here</a></span>"-->
+
+
+</script>
+
+{% endblock%}
+

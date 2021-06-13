@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit blog post {% endblock%}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+<h1>Update Post... </h1>
+<br><br>
+<div class="form-group">
+    <form method="Post">
+        {% csrf_token %}
+        {{ form.media }}
+        <!--            {{ form.as_p }}-->
+
+
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper m-2">
+            {{ form.subject.errors }}
+            <label for="{{ form.title.id_for_label }}">Title</label>
+            <br>
+            {{ form.title }}
+        </div>
+
+        <div class="fieldWrapper m-2">
+            {{ form.message.errors }}
+            <label for="{{ form.header_image.id_for_label }}">Header image</label>
+            <br>
+            <input class="form-control" type="file" name="header_image" accept="image/*" id="id_header_image">
+        </div>
+
+        <div class="fieldWrapper m-2">
+            {{ form.sender.errors }}
+            <label for="{{ form.body.id_for_label }}">Your email address:</label>
+            <br>
+            {{ form.body }}
+        </div>
+
+
+        <!--        {% for field in form %}-->
+        <!--        <div class="fieldWrapper">-->
+        <!--            {{ field.errors }}-->
+        <!--            <div>-->
+        <!--                            {{ field.label_tag }}-->
+        <!--            </div>-->
+        <!--            <div>-->
+        <!--                {% if header_image %}-->
+        <!--                    <div class="help"></div>-->
+        <!--                {% else %}-->
+        <!--                    {{ field }}-->
+        <!--                {% endif %}-->
+        <!--            </div>-->
+        <!--            <br>-->
+        <!--        </div>-->
+        <!--        {% endfor %}-->
+
+
+        <button class="btn btn-secondary">Update</button>
+    </form>
+</div>
+{% else %}
+You are not allowed here (and you know it)!
+{% endif %}
+{% else %}
+You are not allowed here (and you know it)!
+{% endif %}
+
+<script>
+var helpText = document.getElementsByClassName("help");
+helpText[0].innerHTML = '<div class="mb-3"><input class="form-control" type="file" id="formFileMultiple" multiple></div>'
+
+</script>
+
+{% endblock%}
+

@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Post</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in object_list %}
+    <div class="col">
+        <div class="card h-100">
+<!--            <img class="card-img-top" src=".../100px180/" alt="Card image cap">-->
+<!--            <img src="..." class="card-img-top" alt="...">-->
+            <div class="img-fluid">
+                {% if post.header_image %}
+            <div style="height: 200px">
+                <img src="{{ post.header_image.url }}" class="card-img-top" style="height: 200px" alt="...">
+                {% endif %}
+            </div>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title"><a href="{%url 'article-detail' post.pk %}">{{post.title}} </a></h5>
+                <small><a href="{%url 'category' post.category|slugify %}">{{post.category|title}} </a></small>
+                -
+                {{post.author.first_name}} {{post.author.last_name}}
+                <small>
+                    <p class="card-text">
+                        {% if post.body|length > 140 %}
+                        {{post.body|slice:":140"|safe}} ...
+                        {% else %}
+                        {{post.body|slice:":140"|safe}}
+                        {% endif %}
+                    </p>
+                </small>
+            </div>
+
+            <div class="card-footer">
+                <small class="text-muted">
+                    {{ post.post_date }}
+                    -
+                    {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                    <a href="{% url 'update_post' post.pk %}">(Edit post)</a>
+                    -
+                    <a href="{% url 'delete_post' post.pk %}">(Delete post)</a>
+                    {% endif %}
+                    {% endif %}
+                </small>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!--<div class="card-group">-->
+<!--    {% for post in object_list %}-->
+<!--    <div class="card ">-->
+
+<!--        <img class="card-img-top" src=".../100px180/" alt="Card image cap">-->
+
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title"><a href="{%url 'article-detail' post.pk %}">{{post.title}} </a></h5>-->
+<!--            <small><a href="{%url 'category' post.category|slugify %}">{{post.category}} </a></small>-->
+<!--            - -->
+<!--            {{post.author.first_name}} {{post.author.last_name}}-->
+<!--            - -->
+<!--            <small>-->
+<!--                <p class="card-text">-->
+<!--                    {% if post.body|length > 140 %}-->
+<!--                    {{post.body|slice:":140"|safe}} ...-->
+<!--                    {% else %}-->
+<!--                    {{post.body|slice:":140"|safe}}-->
+<!--                    {% endif %}-->
+<!--                </p>-->
+<!--            </small>-->
+<!--        </div>-->
+
+<!--        <div class="card-footer">-->
+<!--            <small class="text-muted">-->
+<!--                {{ post.post_date }}-->
+<!--                - -->
+<!--                {% if user.is_authenticated %}-->
+<!--                {% if user.id == post.author.id %}-->
+<!--                <a href="{% url 'update_post' post.pk %}">(Edit post)</a>-->
+<!--                - -->
+<!--                <a href="{% url 'delete_post' post.pk %}">(Delete post)</a>-->
+<!--                {% endif %}-->
+<!--                {% endif %}-->
+<!--            </small>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--</div>-->
+
+
+{% endblock%}
+
+<!--    <li><a href="{%url 'article-detail' post.pk %}">{{post.title}} </a>-->
+<!--        - -->
+<!--        <small><a href="{%url 'category' post.category|slugify %}">{{post.category}} </a></small>-->
+<!--        - -->
+<!--        {{post.author.first_name}} {{post.author.last_name}}-->
+<!--        - -->
+<!--        <small>-->
+<!--            {{ post.post_date }}-->
+<!--            - -->
+<!--            {% if user.is_authenticated %}-->
+<!--            {% if user.id == post.author.id %}-->
+<!--            <a href="{% url 'update_post' post.pk %}">(Edit post)</a>-->
+<!--            - -->
+<!--            <a href="{% url 'delete_post' post.pk %}">(Delete post)</a>-->
+<!--            {% endif %}-->
+<!--            {% endif %}-->
+<!--        </small>-->
+<!--        <br/>-->
+<!--        {% if post.body|length > 140 %}-->
+<!--        {{post.body|slice:":140"|safe}} ...-->
+<!--        {% else %}-->
+<!--        {{post.body|slice:":140"|safe}}-->
+<!--        {% endif %}-->
+
+<!--    </li>-->
