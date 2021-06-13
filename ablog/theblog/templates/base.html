@@ -62,7 +62,7 @@
 
                 <div class="dropdown-menu translate-middle-x" aria-labelledby="navbarDropdown">
 
-                    <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a>
+                    <a class="dropdown-item" href="{% url 'edit_settings' %}">Edit Settings</a>
 
                     {% if user.profile.id %}
                     <a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile</a>
@@ -136,7 +136,7 @@
         <!--                </a>-->
         <!--                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">-->
 
-        <!--                    <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a>-->
+        <!--                    <li><a class="dropdown-item" href="{% url 'edit_settings' %}">Edit Settings</a>-->
         <!--                    </li>-->
 
         <!--                    {% if user.profile.id %}-->
